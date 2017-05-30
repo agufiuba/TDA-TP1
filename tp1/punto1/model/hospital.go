@@ -1,7 +1,6 @@
 package model
 
 import (
-	"container/list"
 	"math/rand"
 )
 
@@ -9,34 +8,39 @@ type Hospital struct {
 	ID           int
 	Preferencias map[*Estudiante]int
 	Vacantes     int
-	Contratos    list.List
+	posicionesT  []int
 }
 
-func NewHospital(id, cantE int) Hospital {
-	h := Hospital{}
-	h.Vacantes = rand.Intn(int(float64(cantE)*0.3)) + 1
-	h.ID = id
-	h.Preferencias = make(map[*Estudiante]int, cantE)
-	return h
-}
-
-func (h *Hospital) AgregarContrato(e *Estudiante) {
-	f := h.Contratos.Front()
-	l := h.Contratos.Len()
-	if f != nil {
-		for ; f != nil; f = f.Next() {
-			ec := f.Value.(*Estudiante)
-			if h.Preferencias[ec] < h.Preferencias[e] {
-				h.Contratos.InsertBefore(e, f)
-				break
+func NewHospitales(cantH, cantE int) []*Hospital {
+	vacantesDisponibles := cantE
+	hospitales := make([]*Hospital, cantH)
+	for id := 0; id < cantH; id++ {
+		h := Hospital{}
+		h.ID = id + 1
+		h.Preferencias = make(map[*Estudiante]int, cantE)
+		base := cantE - vacantesDisponibles
+		if id != (cantH - 1) {
+			if vacantesDisponibles > 0 {
+				prom := int(float64(vacantesDisponibles) / float64(cantH-id))
+				h.Vacantes = prom - 2 + rand.Intn(4)
+				if h.Vacantes < 0 {
+					h.Vacantes = 0
+				}
+				if h.Vacantes > vacantesDisponibles {
+					h.Vacantes = vacantesDisponibles
+				}
+				vacantesDisponibles = vacantesDisponibles - h.Vacantes
 			}
+		} else {
+			h.Vacantes = vacantesDisponibles
 		}
-		if l == h.Contratos.Len() {
-			h.Contratos.PushBack(e)
+		h.posicionesT = make([]int, h.Vacantes)
+		for i := 0; i < h.Vacantes; i++ {
+			h.posicionesT[i] = base + i
 		}
-	} else {
-		h.Contratos.PushFront(e)
+		hospitales[id] = &h
 	}
+	return hospitales
 }
 
 func (h *Hospital) Shuffle() {
@@ -46,4 +50,12 @@ func (h *Hospital) Shuffle() {
 		h.Preferencias[e] = perm[i] + 1
 		i++
 	}
+}
+
+func (h *Hospital) GetPositionAt(i int) int {
+	l := len(h.posicionesT)
+	if l > 0 && i < l {
+		return h.posicionesT[i]
+	}
+	return -1
 }

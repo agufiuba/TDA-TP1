@@ -1,10 +1,10 @@
 package punto2
 
 import (
-	"tda/tp1/punto23/model"
 	"container/list"
 	"strconv"
 	"strings"
+	"tda/tp1/punto23/model"
 )
 
 func ShowHT(aps *list.List) string {

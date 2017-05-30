@@ -1,8 +1,8 @@
 package punto3
 
 import (
-	"tda/tp1/punto23/model"
 	"container/list"
+	"tda/tp1/punto23/model"
 )
 
 func Kosaraju(vertices *list.List, finder map[*model.V]*list.Element) *list.List {

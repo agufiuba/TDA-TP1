@@ -1,13 +1,13 @@
 package main
 
 import (
+	"flag"
+	"strconv"
 	"tda/tp1/punto1"
 	"tda/tp1/punto23"
 	"tda/tp1/punto23/punto2"
 	"tda/tp1/punto23/punto3"
 	"tda/utils"
-	"flag"
-	"strconv"
 
 	log "github.com/Sirupsen/logrus"
 )
@@ -57,19 +57,6 @@ func main() {
 					}
 				} else {
 					log.Fatal("La cantidad de estudiantes/hospitales debe ser mayor a 3")
-				}
-			} else {
-				if len(flag.Args()) == 1 {
-					i := flag.Args()[0]
-					log.Info("Parseando preferencias desde '" + i + "'")
-					estudiantes, hospitales, _ := punto1.LoadPref(i)
-					if *d {
-						log.Debug(punto1.DebugGS(estudiantes, hospitales))
-					}
-					log.Info("Aplicando algoritmo GaleShapley")
-					log.Info(punto1.ShowGS(punto1.GaleShapley(estudiantes, hospitales)))
-				} else {
-					log.Fatal("Falta parametro de entrada")
 				}
 			}
 		case 2:

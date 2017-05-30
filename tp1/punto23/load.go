@@ -1,13 +1,13 @@
 package punto23
 
 import (
-	"tda/tp1/punto23/model"
 	"bufio"
 	"container/list"
 	"fmt"
 	"log"
 	"os"
 	"sync"
+	"tda/tp1/punto23/model"
 )
 
 func LoadGraph(fn string) (*list.List, map[*model.V]*list.Element) {

@@ -1,8 +1,8 @@
 package punto2
 
 import (
-	"tda/tp1/punto23/model"
 	"container/list"
+	"tda/tp1/punto23/model"
 )
 
 func HopcroftTarjan(vertices *list.List, finder map[*model.V]*list.Element) *list.List {

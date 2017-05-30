@@ -1,11 +1,11 @@
 package punto1
 
 import (
-	"tda/tp1/punto1/model"
 	"container/list"
 	"sort"
 	"strconv"
 	"strings"
+	"tda/tp1/punto1/model"
 )
 
 func DebugGS(estudiantes *list.List, hospitales *[]*model.Hospital) string {

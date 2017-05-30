@@ -1,10 +1,10 @@
 package punto3
 
 import (
-	"tda/tp1/punto23/model"
 	"container/list"
 	"strconv"
 	"strings"
+	"tda/tp1/punto23/model"
 )
 
 func ShowK(cfcs *list.List) string {
