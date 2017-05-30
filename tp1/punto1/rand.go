@@ -1,10 +1,10 @@
 package punto1
 
 import (
-	"tda/tp1/punto1/model"
 	"container/list"
 	"math/rand"
 	"strconv"
+	"tda/tp1/punto1/model"
 	"time"
 )
 
@@ -14,14 +14,10 @@ func init() {
 
 func GenerateArrays(cantE, cantH int) (*list.List, *[]*model.Hospital) {
 	estudiantes := list.New()
-	hospitales := make([]*model.Hospital, 0, cantH)
+	hospitales := model.NewHospitales(cantH, cantE)
 	for i := 1; i <= cantE; i++ {
 		e := model.NewEstudiante(i, cantH)
 		estudiantes.PushFront(&e)
-	}
-	for i := 1; i <= cantH; i++ {
-		h := model.NewHospital(i, cantE)
-		hospitales = append(hospitales, &h)
 	}
 	i := 0
 	for f := estudiantes.Front(); f != nil; f = f.Next() {

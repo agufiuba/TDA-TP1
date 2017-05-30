@@ -8,12 +8,16 @@ import (
 )
 
 var (
-	cantE                   = 100
-	cantH                   = 100
+	cantE                   = 5
+	cantH                   = 10
 	estudiantes, hospitales = GenerateArrays(cantE, cantH)
 )
 
 func TestGaleShapley(t *testing.T) {
+	model.NewHospitales(cantH, cantE)
+	// for _, h := range hospitales2 {
+	// 	fmt.Println(h.Vacantes)
+	// }
 	contratos := GaleShapley(estudiantes, hospitales)
 	estable := true
 	for h, es := range contratos {

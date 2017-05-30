@@ -10,6 +10,8 @@ type Estudiante struct {
 	PreferenciasI map[*Hospital]int
 	Propuestas    int
 	prefCount     int
+	groupH				int
+	h							int
 }
 
 func NewEstudiante(id, cantH int) Estudiante {
@@ -33,4 +35,16 @@ func (e *Estudiante) AddPref(h *Hospital) {
 	e.Preferencias[e.prefCount] = h
 	e.PreferenciasI[h] = e.prefCount
 	e.prefCount++
+}
+
+func (e *Estudiante) GetNextProp() int {
+	pos := e.Preferencias[e.h].GetPositionAt(e.groupH)
+	if pos != -1 {
+		e.groupH++
+	} else {
+		e.h++
+		e.groupH = 0
+		pos = e.GetNextProp()
+	}
+	return pos
 }
